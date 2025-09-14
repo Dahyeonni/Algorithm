@@ -3,49 +3,49 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Solution {
-
-	static int N, cnt;
-	static boolean[] col, diag1, diag2;
+	static int N, ans;
+	static int[] map;
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
+
 		int T = Integer.parseInt(br.readLine());
 
 		for (int t = 1; t <= T; t++) {
 			N = Integer.parseInt(br.readLine());
+			ans = 0;
+			map = new int[N];
 
-			cnt = 0;
-
-			col = new boolean[N];
-			diag1 = new boolean[N * 2];
-			diag2 = new boolean[N * 2];
-
-			dfs(0);
-
-			sb.append("#").append(t).append(" ").append(cnt).append("\n");
+			queen(0);
+			System.out.println("#" + t + " " + ans);
 		}
-		System.out.print(sb);
+
 	}
 
-	static void dfs(int row) {
-		// 기저 조건
+	static void queen(int row) {
 		if (row == N) {
-			cnt++;
+			ans++;
 			return;
 		}
 
 		for (int c = 0; c < N; c++) {
-			if (col[c] || diag1[row + c] || diag2[row - c + N])
-				continue;
-
-			col[c] = diag1[row + c] = diag2[row - c + N] = true;
-
-			dfs(row + 1);
-
-			col[c] = diag1[row + c] = diag2[row - c + N] = false;
+			if (check(row, c)) {
+				map[row] = c;
+				queen(row + 1);
+			}
 		}
+
+	}
+
+	private static boolean check(int row, int col) {
+		for (int i = 0; i < row; i++) {
+			if (map[i] == col || row - i == Math.abs(col - map[i]))
+				return false;
+		}
+		return true;
 	}
 
 }
