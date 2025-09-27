@@ -3,32 +3,28 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-
-	static int n;
-	static int dp[];
+	
+	static int[] dp;
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
-
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		n = Integer.parseInt(br.readLine());
-
-		System.out.println(solve(n));
-
-	}
-
-	static int solve(int n) {
-		dp = new int[n + 1];
+		StringBuilder sb = new StringBuilder();
+		int N = Integer.parseInt(br.readLine());
+		
+		// 방법의 수
+		dp = new int[N+1];
+		
 		dp[1] = 1;
-
-		if (n >= 2)
-			dp[2] = 2;
-
-		for (int i = 3; i <= n; i++) {
-			dp[i] = (dp[i - 1] + dp[i - 2]) % 10007;
+		if (N >= 2) dp[2] = 2;
+		
+		for(int i = 3; i <= N; i++) {
+			dp[i] = dp[i-1] + dp[i-2];
+			dp[i] = dp[i] % 10007;
 		}
-
-		return dp[n];
-
+		
+		System.out.println(dp[N]);
+		
 	}
 
 }
