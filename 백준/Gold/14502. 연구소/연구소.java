@@ -33,28 +33,31 @@ public class Main {
 			}
 		} // 입력완료
 
-		threewall(0);
+		threewall(0,0);
 
 		System.out.println(MAX);
 
 	}
 
-	static void threewall(int cnt) {
-		if (cnt == 3) {
-			virus();
-			return;
-		}
 
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < M; j++) {
-				if (map[i][j] == 0) { // 빈칸
-					map[i][j] = 1;
-					threewall(cnt + 1);
-					map[i][j] = 0;
-				}
-			}
-		}
-	}
+	
+    static void threewall(int start, int cnt) {
+        if (cnt == 3) {
+            virus();
+            return;
+        }
+
+        for (int idx = start; idx < N * M; idx++) {
+            int r = idx / M;
+            int c = idx % M;
+
+            if (map[r][c] == 0) {
+                map[r][c] = 1;
+                threewall(idx + 1, cnt + 1);
+                map[r][c] = 0;
+            }
+        }
+    }
 
 	static void virus() {
 		Queue<int[]> q = new ArrayDeque<>();
