@@ -36,7 +36,7 @@ public class Main {
 
 		// 지수를 나눈 값이 홀수인 경우
 		if (B % 2 == 1)
-			modular = (modular * A) % C;
+			modular = (modular * (A % C)) % C;
 
 		return modular;
 
