@@ -17,7 +17,7 @@ public class Main {
 		//10
 		if(N >= 2) dp[2] = 1;
 		// 10 + 0 or 1
-		// 100 + 0 or 1 101 + 1 or 0 
+		// 100 + 0 or 1 101 + 0 
 		for(int i = 3; i <= N; i++) {
 			dp[i] = dp[i-1] + dp[i-2];
 		}
