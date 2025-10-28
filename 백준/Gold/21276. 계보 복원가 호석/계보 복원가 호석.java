@@ -49,7 +49,7 @@ public class Main {
 			String ancestor = st.nextToken();
 
 			int from = mapping.get(ancestor);
-			int to = mapping.get(ancestor);
+			int to = mapping.get(grandchild);
 
 			adj[from].add(to);
 			degree[to]++;
